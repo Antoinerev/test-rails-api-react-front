@@ -6,13 +6,13 @@ import $ from 'jquery';
 
 
 export class TodoList extends Component {
-  constructor() {
-    super();
-    // const todo = this.props.todo;
-    // this.state = {items: [...props.todo.all_items]};
-  }
+  // constructor() {
+  //   super();
+  //   // const todo = this.props.todo;
+  //   // this.state = {items: [...props.todo.all_items]};
+  // }
   render() {
-    console.log('todo is: '+this.props.title);
+    // console.log('todo is: '+this.props.title);
     return(
       <ul className="small-box">
         <li key={this.props.id}>
@@ -47,11 +47,11 @@ export class TodoList extends Component {
     })
   }
 }
-class ItemsList extends Component {
-  render() {
-    console.log('item '+this.props.name);
-    return(
-        <li key={this.props.id}>{this.props.name}</li>
-    );
-  }
-}
+// class ItemsList extends Component {
+//   render() {
+//     console.log('item '+this.props.name);
+//     return(
+//         <li key={this.props.id}>{this.props.name}</li>
+//     );
+//   }
+// }

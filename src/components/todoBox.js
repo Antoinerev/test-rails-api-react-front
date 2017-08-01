@@ -22,7 +22,7 @@ export class TodoBox extends Component {
 
         </div>
         <div className="todolists">
-          {this.state.todos.map(todo => <TodoList {...todo} />)}
+          {this.state.todos.map(todo => <TodoList key={todo.id} {...todo} />)}
 
           <TodoForm addTodo={this._addTodo.bind(this)} />
         </div>
