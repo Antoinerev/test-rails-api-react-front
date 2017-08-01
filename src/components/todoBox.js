@@ -22,7 +22,8 @@ export class TodoBox extends Component {
 
         </div>
         <div className="todolists">
-          <TodoList todos={this.state.todos} />
+          {this.state.todos.map(todo => <TodoList {...todo} />)}
+
           <TodoForm addTodo={this._addTodo.bind(this)} />
         </div>
       </div>
@@ -31,7 +32,7 @@ export class TodoBox extends Component {
 
   _fetchTodos() {
     let ajaxUrlLocal = 'http://localhost:3000/api/todos/todos/';
-    let ajaxUrlDistant = 'https://test-rails-api.herokuapp.com/api/todos/todos';
+    // let ajaxUrlDistant = 'https://test-rails-api.herokuapp.com/api/todos/todos';
     var _this = this;
     $.ajax({
       type: "GET",
@@ -52,14 +53,14 @@ export class TodoBox extends Component {
   }
 
   _addTodo(title) {
-    const todo = {
+    const todoToAdd = {
       title
     };
     let _this = this;
     $.ajax({
       type: "POST",
       url: 'http://localhost:3000/api/todos/todos/',
-      data: todo,
+      data: todoToAdd,
       success: function(newTodo){
         console.log(_this.state.todos);
         _this.setState({todos: _this.state.todos.concat([newTodo])});

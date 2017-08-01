@@ -1,6 +1,6 @@
 /* eslint-env browser */
 import React, { Component } from 'react';
-import $ from 'jquery';
+// import $ from 'jquery';
 // import logo from './logo.svg';
 // import '../App.css';
 
