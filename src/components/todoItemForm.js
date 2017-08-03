@@ -15,10 +15,9 @@ export class TodoItemForm extends Component {
     return(
 
       <form onSubmit={this._handleSubmit.bind(this)}>
-        <h3>Add a new todo item</h3>
         <label>
-          Item name:
-          <input type="text" name="name" ref={(input) => this._name = input} />
+          Add New:
+          <input type="text" name="name" ref={(input) => this._name = input} placeholder="item name" />
         </label>
         <input type="submit" value="Submit" />
       </form>

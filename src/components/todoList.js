@@ -15,19 +15,19 @@ export class TodoList extends Component {
   }
   render() {
     var isActive ="";
+    var formContent = "";
     if(this.props.activeTodo === this.props.id) {
       isActive = "active";
+      formContent = <TodoItemForm />;
     };
     return(
       <ul className={"small-box "+ isActive} onClick={this._handleActivateTodo.bind(this)} >
         <li key={this.props.id}>
           <h3 className="TodoTitle" >{this.props.title}</h3>
-          <h5>Yolo</h5>
-          <button onClick={this._handleAddItemToTodolist.bind(this)}>"Add Item"</button>
           <ol id={this.props.id}>
           {this.props.all_items.map(item => <li key={item.id}>{item.name}</li> )}
           </ol>
-          <TodoItemForm />
+          {formContent}
         </li>
       </ul>
     );
