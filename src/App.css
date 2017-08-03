@@ -49,3 +49,6 @@
 .todolists {
   text-align: left;
 }
+.active {
+  background-color: rgba(0,255,0,0.2);
+}

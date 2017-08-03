@@ -8,21 +8,23 @@ export class TodoBox extends Component {
   constructor() {
     super();
 
-    this.state = {todos: []};
+    this.state = {todos: [], activeTodo: 1};
+
   }
   componentWillMount() {
     this._fetchTodos();
+
   }
   render() {
     return(
-
       <div className="todobox">
+      {console.log(this.state.activeTodo)}
         <div id="add-new-todo">
         <h2>Here are your lists</h2>
 
         </div>
         <div className="todolists">
-          {this.state.todos.map(todo => <TodoList key={todo.id} {...todo} />)}
+          {this.state.todos.map(todo => <TodoList key={todo.id} activeTodo={this.state.activeTodo} activateTodo={this._activateTodo.bind(this)} {...todo} />)}
 
           <TodoForm addTodo={this._addTodo.bind(this)} />
         </div>
@@ -49,6 +51,7 @@ export class TodoBox extends Component {
       } else {
         _this.setState({todos: [data]});
       }
+      _this.setState({activeTodo: _this.state.todos[0].id});
     });
   }
 
@@ -67,5 +70,7 @@ export class TodoBox extends Component {
       }
     });
   }
-
+  _activateTodo(todoId) {
+    this.setState({activeTodo: todoId})
+  }
 }
