@@ -8,27 +8,31 @@ import {TodoItemForm} from './todoItemForm.js';
 
 
 export class TodoList extends Component {
-  constructor() {
-    super();
-    // const todo = this.props.todo;
-    // this.state = {active: false};
+  // constructor() {
+  //   super();
+
+
+  // }
+  componentWillMount() {
+    this.state = {items: this.props.all_items};
   }
   render() {
     var isActive ="";
     var formContent = "";
+    var todoId = this.props.id;
     if(this.props.activeTodo === this.props.id) {
       isActive = "active";
-      formContent = <TodoItemForm />;
+      formContent = <TodoItemForm addTodoItem={this._addTodoItem.bind(this)} />;
     };
     return(
-      <ul className={"small-box "+ isActive} onClick={this._handleActivateTodo.bind(this)} >
-        <li key={this.props.id}>
+      <ul className={"small-box "+ isActive}  >
+        <li key={"todoList"+this.props.id} onClick={this._handleActivateTodo.bind(this)}>
           <h3 className="TodoTitle" >{this.props.title}</h3>
-          <ol id={this.props.id}>
-          {this.props.all_items.map(item => <li key={item.id}>{item.name}</li> )}
+          <ol id={"todoList"+this.props.id}>
+          {this.state.items.map(item => <li key={`todo${todoId}Item${item.id}`}>{item.name}</li> )}
           </ol>
-          {formContent}
         </li>
+          {formContent}
       </ul>
     );
   }
@@ -37,18 +41,12 @@ export class TodoList extends Component {
     this.props.activateTodo(this.props.id);
   }
 
-  _handleAddItemToTodolist(e) {
-    e.preventDefault();
-
-    let content = $('#'+ this.props.id).append($('TodoItemForm'));
-    console.log('#'+ this.props.id);
-  }
-
   _addTodoItem(itemName) {
-    const todoId = this.id;
-    const todoItem = { itemName };
+    const todoId = this.props.id;
+    const todoItem = { name:itemName };
+    // console.log(name:itemName);
     let _this = this;
-    const url = 'http://localhost:3000/api/todos/todos/'+{todoId}+'/items/';
+    const url = 'http://localhost:3000/api/todos/todos/'+todoId+'/items/';
 
     // $.post(`http://localhost:3000/api/todos/todos/${todoId}/items/`,
     //   data: todoItem,
@@ -60,8 +58,10 @@ export class TodoList extends Component {
       type: 'post',
       url: url,
       data: todoItem,
-      success: function(newItem){
+      success: function(updatedList){
+        var newItem = updatedList.all_items[updatedList.all_items.length-1];
         _this.setState({items: _this.state.items.concat(newItem)});
+        // console.log(newItem.id);
       }
     })
   }

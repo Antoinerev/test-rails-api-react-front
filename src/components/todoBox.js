@@ -18,13 +18,12 @@ export class TodoBox extends Component {
   render() {
     return(
       <div className="todobox">
-      {console.log(this.state.activeTodo)}
         <div id="add-new-todo">
         <h2>Here are your lists</h2>
 
         </div>
         <div className="todolists">
-          {this.state.todos.map(todo => <TodoList key={todo.id} activeTodo={this.state.activeTodo} activateTodo={this._activateTodo.bind(this)} {...todo} />)}
+          {this.state.todos.map(todo => <TodoList key={"todoBox"+todo.id} activeTodo={this.state.activeTodo} activateTodo={this._activateTodo.bind(this)} {...todo} />)}
 
           <TodoForm addTodo={this._addTodo.bind(this)} />
         </div>
@@ -65,7 +64,7 @@ export class TodoBox extends Component {
       url: 'http://localhost:3000/api/todos/todos/',
       data: todoToAdd,
       success: function(newTodo){
-        console.log(_this.state.todos);
+        // console.log(_this.state.todos);
         _this.setState({todos: _this.state.todos.concat([newTodo])});
       }
     });

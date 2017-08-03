@@ -28,6 +28,7 @@ export class TodoItemForm extends Component {
     // return alert("OK!");
     let name = this._name;
 
-    this.props._addTodoItem(name.value);
+    this.props.addTodoItem(name.value);
+    // console.log(this.props.addTodoItem);
   }
 }
