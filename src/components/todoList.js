@@ -29,7 +29,7 @@ export class TodoList extends Component {
         <li key={"todoList"+this.props.id} onClick={this._handleActivateTodo.bind(this)}>
           <h3 className="TodoTitle" >{this.props.title}</h3>
           <ol id={"todoList"+this.props.id}>
-          {this.state.items.map(item => <li key={`todo${todoId}Item${item.id}`}>{item.name}</li> )}
+          {this.state.items.map(item => <div className="itemBox"><li  key={`todo${todoId}Item${item.id}`}>{item.name}</li><div>X</div></div> )}
           </ol>
         </li>
           {formContent}
@@ -61,6 +61,24 @@ export class TodoList extends Component {
       success: function(updatedList){
         var newItem = updatedList.all_items[updatedList.all_items.length-1];
         _this.setState({items: _this.state.items.concat(newItem)});
+        // console.log(newItem.id);
+      }
+    })
+  }
+  _removeTodoItem(item) {
+    const todoId = this.props.id;
+    // const todoItem = { name:itemName };
+    // console.log(name:itemName);
+    let _this = this;
+    const url = 'http://localhost:3000/api/todos/todos/'+todoId+'/items/'+item.id;
+
+    $.ajax({
+      type: 'DELETE',
+      url: url,
+      // data: todoItem,
+      success: function(updatedList){
+        let itemIndex = _this.state.items.indexOf(item);
+        _this.setState({items: _this.state.items.splice(itemIndex, 1)});
         // console.log(newItem.id);
       }
     })
